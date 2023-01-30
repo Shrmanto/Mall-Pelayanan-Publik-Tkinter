@@ -230,7 +230,7 @@ def menuPengajuan():
         frameDt.place(width=500, height=328, y=40, x=25)
         # frame2.pack(padx=10, pady=10, fill=BOTH, expand=True)
 
-        exBtn = Button(master=frame2, text="<Kembali", width=10, command=Ktp)
+        exBtn = Button(master=frame2, text="<Kembali", width=10, command=Kk)
         exBtn.place(y=460, x=10)
     def formKKpU():
         destroyy()
@@ -250,14 +250,14 @@ def menuPengajuan():
         scrEnt = Entry(master=frame1)
         scrEnt.place(y=10, x=400)
 
-        ubhBtn = Button(master=frame1, text="Ubah", font=("Roboto", 8), command=formKtpC)
+        ubhBtn = Button(master=frame1, text="Ubah", font=("Roboto", 8), command=formKkC)
         ubhBtn.place(y=8, x=140, width=40)
 
         frameDt = LabelFrame(master=frame1, text="Daftar Data Permohonan")
         frameDt.place(width=500, height=328, y=40, x=25)
         # frame2.pack(padx=10, pady=10, fill=BOTH, expand=True)
 
-        exBtn = Button(master=frame2, text="<Kembali", width=10, command=Ktp)
+        exBtn = Button(master=frame2, text="<Kembali", width=10, command=Kk)
         exBtn.place(y=460, x=10)
     def formKKpD():
         destroyy()
@@ -284,7 +284,7 @@ def menuPengajuan():
         frameDt.place(width=500, height=328, y=40, x=25)
         # frame2.pack(padx=10, pady=10, fill=BOTH, expand=True)
 
-        exBtn = Button(master=frame2, text="<Kembali", width=10, command=Ktp)
+        exBtn = Button(master=frame2, text="<Kembali", width=10, command=Kk)
         exBtn.place(y=460, x=10)
 
     def formAktKR():
@@ -305,7 +305,7 @@ def menuPengajuan():
         frameDt.place(width=500, height=328, y=40, x=25)
         # frame2.pack(padx=10, pady=10, fill=BOTH, expand=True)
 
-        exBtn = Button(master=frame2, text="<Kembali", width=10, command=Ktp)
+        exBtn = Button(master=frame2, text="<Kembali", width=10, command=AktK)
         exBtn.place(y=460, x=10)
     def formAktaKU():
         destroyy()
@@ -332,7 +332,7 @@ def menuPengajuan():
         frameDt.place(width=500, height=328, y=40, x=25)
         # frame2.pack(padx=10, pady=10, fill=BOTH, expand=True)
 
-        exBtn = Button(master=frame2, text="<Kembali", width=10, command=Ktp)
+        exBtn = Button(master=frame2, text="<Kembali", width=10, command=AktK)
         exBtn.place(y=460, x=10)
     def formAktaKD():
         destroyy()
@@ -359,7 +359,7 @@ def menuPengajuan():
         frameDt.place(width=500, height=328, y=40, x=25)
         # frame2.pack(padx=10, pady=10, fill=BOTH, expand=True)
 
-        exBtn = Button(master=frame2, text="<Kembali", width=10, command=Ktp)
+        exBtn = Button(master=frame2, text="<Kembali", width=10, command=AktK)
         exBtn.place(y=460, x=10)
 
     def formAktPR():
@@ -380,7 +380,7 @@ def menuPengajuan():
         frameDt.place(width=500, height=328, y=40, x=25)
         # frame2.pack(padx=10, pady=10, fill=BOTH, expand=True)
 
-        exBtn = Button(master=frame2, text="<Kembali", width=10, command=Ktp)
+        exBtn = Button(master=frame2, text="<Kembali", width=10, command=AktP)
         exBtn.place(y=460, x=10)
     def formAktaPU():
         destroyy()
@@ -407,7 +407,7 @@ def menuPengajuan():
         frameDt.place(width=500, height=328, y=40, x=25)
         # frame2.pack(padx=10, pady=10, fill=BOTH, expand=True)
 
-        exBtn = Button(master=frame2, text="<Kembali", width=10, command=Ktp)
+        exBtn = Button(master=frame2, text="<Kembali", width=10, command=AktP)
         exBtn.place(y=460, x=10)
     def formAktaPD():
         destroyy()
@@ -434,7 +434,7 @@ def menuPengajuan():
         frameDt.place(width=500, height=328, y=40, x=25)
         # frame2.pack(padx=10, pady=10, fill=BOTH, expand=True)
 
-        exBtn = Button(master=frame2, text="<Kembali", width=10, command=Ktp)
+        exBtn = Button(master=frame2, text="<Kembali", width=10, command=AktP)
         exBtn.place(y=460, x=10)
 
     def formKiAR():
@@ -455,7 +455,7 @@ def menuPengajuan():
         frameDt.place(width=500, height=328, y=40, x=25)
         # frame2.pack(padx=10, pady=10, fill=BOTH, expand=True)
 
-        exBtn = Button(master=frame2, text="<Kembali", width=10, command=Ktp)
+        exBtn = Button(master=frame2, text="<Kembali", width=10, command=KiA)
         exBtn.place(y=460, x=10)
     def formKiAU():
         destroyy()
@@ -482,7 +482,7 @@ def menuPengajuan():
         frameDt.place(width=500, height=328, y=40, x=25)
         # frame2.pack(padx=10, pady=10, fill=BOTH, expand=True)
 
-        exBtn = Button(master=frame2, text="<Kembali", width=10, command=Ktp)
+        exBtn = Button(master=frame2, text="<Kembali", width=10, command=KiA)
         exBtn.place(y=460, x=10)
     def formKiAD():
         destroyy()
@@ -509,7 +509,7 @@ def menuPengajuan():
         frameDt.place(width=500, height=328, y=40, x=25)
         # frame2.pack(padx=10, pady=10, fill=BOTH, expand=True)
 
-        exBtn = Button(master=frame2, text="<Kembali", width=10, command=Ktp)
+        exBtn = Button(master=frame2, text="<Kembali", width=10, command=KiA)
         exBtn.place(y=460, x=10)
 
     def Ktp():
@@ -554,7 +554,7 @@ def menuPengajuan():
         newphotoD = ImageTk.PhotoImage(resizeD)
         jdl = Label(master=frame2, text="PENGAJUAN PERMOHONAN KK", font=("Roboto", 10, "bold"))
         jdl.pack(padx=10, pady=20)
-        btn1 = Button(master=frame2, image=newphotoC, width=213, height=185)
+        btn1 = Button(master=frame2, image=newphotoC, width=213, height=185, command=formKkC)
         btn1.place(x=40, y=60)
         btn2 = Button(master=frame2, image=newphotoR, width=213, height=185, command=formKKR)
         btn2.place(x=290, y=60)
@@ -724,36 +724,107 @@ def formKtpC():
     submBtn = Button(master=new, text="Submit", width=40, command="")
     submBtn.pack(pady=5)
 
-def formKtpR():
-    # destroyy()
+def formKkC():
     global root
-    root.geometry("550x500")
-    jdl = Label(master=root, text="DAFTAR DATA PERMOHONAN", font=("Roboto", 15, "bold"))
-    jdl.pack(pady=5)
-    frame1 = LabelFrame(master=root)
-    frame1.place(width=550, height=400, y=50)
-    # frame1.pack(pady=5, fill=BOTH, expand=True)
+    new = Toplevel(root)
+    new.title("Form Kartu Keluarga")
+    new.geometry("600x530")
+    jdlForm = Label(master=new, text="FORMULIR PERMOHONAN KARTU KELUARGA", font=("Roboto", 13, "bold"))
+    jdlForm.pack(pady=5)
 
-    UbhLbl = Label(master=frame1, text="Ubah Data :")
-    UbhLbl.place(y=10, x=21)
-    scrLbl = Label(master=frame1, text="Search :")
-    scrLbl.place(y=10, x=350)
+    frame1 = LabelFrame(master=new)
+    frame1.pack(padx=10,fill=BOTH, expand=True)
 
-    UbhEnt = Entry(master=frame1)
-    UbhEnt.place(y=10, x=92, width=40)
-    scrEnt = Entry(master=frame1)
-    scrEnt.place(y=10, x=400)
+    prov = Label(master=frame1, text="Pemerintah Provinsi                                   :", font=("Roboto", 10 ,"bold"))
+    prov.place(x=10, y=10)
+    kab = Label(master=frame1, text="Pemerintah Kabupaten/Kota                      :", font=("Roboto", 10 ,"bold"))
+    kab.place(x=10, y=30)
+    kect = Label(master=frame1, text="Kecamatan                                                 :", font=("Roboto", 10 ,"bold"))
+    kect.place(x=10, y=50)
+    dess = Label(master=frame1, text="Kelurahan/Desa                                          :", font=("Roboto", 10 ,"bold"))
+    dess.place(x=10, y=70)
+    eProv = Entry(master=frame1, width=43)
+    eProv.place(x=300, y=10)
+    eKab = Entry(master=frame1, width=43)
+    eKab.place(x=300, y=30)
+    eKect = Entry(master=frame1, width=43)
+    eKect.place(x=300, y=50)
+    eDess = Entry(master=frame1, width=43)
+    eDess.place(x=300, y=70)
 
-    ubhBtn = Button(master=frame1, text="Ubah", font=("Roboto", 8))
-    ubhBtn.place(y=8, x=140, width=40)
+    frame2 = LabelFrame(master=frame1)
+    frame2.place(y=95, x=0, width=576, height=155)
 
-    frame2 = LabelFrame(master=frame1, text="Daftar Data Permohonan")
-    frame2.place(width=500, height=328, y=40, x=25)
-    # frame2.pack(padx=10, pady=10, fill=BOTH, expand=True)
+    NmPem = Label(master=frame2, text="Nama Lengkap Pemohon  :", font=("Roboto", 8))
+    NmPem.place(x=8, y=5)
+    NiKPem = Label(master=frame2, text="NIK Pemohon                    :", font=("Roboto", 8))
+    NiKPem.place(x=8, y=25)
+    NkKPem = Label(master=frame2, text="No. KK Semula                 :", font=("Roboto", 8))
+    NkKPem.place(x=8, y=45)
+    AlmtPem = Label(master=frame2, text="Alamat Pemohon              :", font=("Roboto", 8))
+    AlmtPem.place(x=8, y=65)
+    AlsPem = Label(master=frame2, text="Alasan Pemohon              :", font=("Roboto", 8))
+    AlsPem.place(x=8, y=85)
+    Als1Pem = Label(master=frame2, text="1. Karena Penambahan Anggota Keluarga (Kelahiran, Kedatangan)", font=("Roboto", 8))
+    Als1Pem.place(x=190, y=85)
+    Als2Pem = Label(master=frame2, text="2. Karena Pengurangan Anggota Keluarga (Kematian, Kepindahan)", font=("Roboto", 8))
+    Als2Pem.place(x=190, y=105)
+    eNumPem = Entry(master=frame2, width=68)
+    eNumPem.place(x=150, y=5)
+    eNikPem = Entry(master=frame2, width=68)
+    eNikPem.place(x=150, y=25)
+    eNkKPem = Entry(master=frame2, width=68)
+    eNkKPem.place(x=150, y=45)
+    eAlmtPem = Entry(master=frame2, width=68)
+    eAlmtPem.place(x=150, y=65)
+    eAlsPem = Entry(master=frame2, width=5)
+    eAlsPem.place(x=150, y=85)
 
-    exBtn = Button(master=root, text="<Kembali", width=10)
-    exBtn.place(y=460, x=10)
+    JmlAngg = Label(master=frame2, text="Jumlah Anggota Keluarga  :", font=("Roboto", 8))
+    JmlAngg.place(x=8, y=125)
+    eJmlAngg = Entry(master=frame2, width=5)
+    eJmlAngg.place(x=150, y=125)
+
+    frame3 = LabelFrame(master=frame1)
+    frame3.place(y=255, x=0, width=576, height=180)
+
+    DafAngg = Label(master=frame3, text="DAFTAR ANGGOTA KELUARGA PEMOHON (hanya diisi Anggota Keluarga saja)", font=("Roboto", 8, "bold"))
+    DafAngg.place(x=8, y=5)
+
+    Ak1 = Label(master=frame3, text="Anggota Keluarga 1           :", font=("Roboto", 8))
+    Ak1.place(x=8, y=25)
+    Ak2 = Label(master=frame3, text="Anggota Keluarga 2           :", font=("Roboto", 8))
+    Ak2.place(x=8, y=45)
+    Ak3 = Label(master=frame3, text="Anggota Keluarga 3           :", font=("Roboto", 8))
+    Ak3.place(x=8, y=65)
+    Ak4 = Label(master=frame3, text="Anggota Keluarga 4           :", font=("Roboto", 8))
+    Ak4.place(x=8, y=85)
+    Ak5 = Label(master=frame3, text="Anggota Keluarga 5           :", font=("Roboto", 8))
+    Ak5.place(x=8, y=105)
+    Ak6 = Label(master=frame3, text="Anggota Keluarga 6           :", font=("Roboto", 8))
+    Ak6.place(x=8, y=125)
+    Ak7 = Label(master=frame3, text="Anggota Keluarga 7           :", font=("Roboto", 8))
+    Ak7.place(x=8, y=145)
+
+    eAk1 = Entry(master=frame3, width=68)
+    eAk1.place(x=150, y=25)
+    eAk2 = Entry(master=frame3, width=68)
+    eAk2.place(x=150, y=45)
+    eAk3 = Entry(master=frame3, width=68)
+    eAk3.place(x=150, y=65)
+    eAk4 = Entry(master=frame3, width=68)
+    eAk4.place(x=150, y=85)
+    eAk5 = Entry(master=frame3, width=68)
+    eAk5.place(x=150, y=105)
+    eAk6 = Entry(master=frame3, width=68)
+    eAk6.place(x=150, y=125)
+    eAk7 = Entry(master=frame3, width=68)
+    eAk7.place(x=150, y=145)
+
+    SubBtn = Button(master=new, text="Submit", width=25)
+    SubBtn.pack(pady=10)
 
 menuAwal()
+# formKkC()
 
 root.mainloop()
