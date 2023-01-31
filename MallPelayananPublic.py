@@ -2,10 +2,72 @@ from tkinter import *
 from PIL import Image
 from PIL import ImageTk
 from tkinter import messagebox, filedialog
-import pandas as pd
+import pandas as pd, json
 
 root = Tk()
 root.title("Mall Pelayanan Publik Jember")
+
+class Node:
+    def __init__(self, info):
+        self.info = info
+        self.next = None
+
+class antrianQueue:
+    def destroy():
+        for widget in root.winfo_children():
+            widget.destroy()
+    def __init__(self,n=50):
+        self.size = n
+        self.sizeIn = 0
+        self.data = []
+    def antrianFull(self):
+        if self.sizeIn == self.size:
+            return True
+        else:
+            return False
+    def antrianKosong(self):
+        if self.sizeIn == 0:
+            return True
+        else:
+            return False
+    def enqueue(self,name):
+        import time, os
+        if self.antrianFull():
+            print("Mohon Maaf Sementara Ini Antrian Sudah Terlalu Penuh")
+            print("Silahkan Menunggu Terlebih Dahulu ! Terima Kasih.")
+        else:
+            self.data.append(name)
+            self.sizeIn = len(self.data)
+            messagebox.showinfo("Info","Telah Berhasil ditambahkan ke antrian")
+            menuCusT()
+            os.system("cls")
+            print(name,"Telah berhasil ditambahkan ke antrian.")
+    def dequeue(self):
+        if self.antrianKosong():
+            print("Antrian masih dalam keadaan kosong")
+            return None
+        else:
+            clearData = self.data.pop(0)
+            self.sizeIn == len(self.data)
+            print("Antrian dengan nama :", clearData)
+            print("Dimohon untuk melakukan konfirmasi")
+            print("Antrian setelah ini adalah :", self.data)
+        print("Tekan enter untuk lanjut")
+        input()
+    def lihatAntrian(self):
+        if self.antrianKosong():
+            print("Saat ini antrian masih kosong")
+        else:
+            print("========== DAFTAR ANTRIAN MALL PELAYANAN PUBLIK ==========")
+            number = 1
+            for i in self.data:
+                print(" "+str(number)+". ",i)
+                number += 1
+            print("Total antrian saat ini :", len(self.data))
+        print("Tekan enter untuk lanjut")
+        input()
+
+data2 = antrianQueue()
 
 def destroy():
     for widget in root.winfo_children():
@@ -48,52 +110,83 @@ def menuCusT():
     jdlCus1 = Label(master=frame1, text="Menu Customer", font=("Roboto", 10))
     jdlCus1.pack(padx=10, pady=10)
 
-    BtnCusT = Button(master=frame1, text="Ambil Nomor Antrian", width=40)
+    BtnCusT = Button(master=frame1, text="Ambil Nomor Antrian", width=40, command=AmbAnt)
     BtnCusT.pack(pady=10)
     BtnCusT = Button(master=frame1, text="Keluar", command=menuAwal, width=40)
     BtnCusT.pack(pady=10)
     
 def LogAdmin():
-    global root, newphoto
+    global root, newphoto, img1
     destroy()
     root.geometry("800x400")
 
-    frameLA1 = LabelFrame(master=root)
+    frameLA1 = LabelFrame(master=root, border=0)
     frameLA1.place(width=400, height=400)
-    photo = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\MallPelayananPublik\\img\\peng.png")
-    resize = photo.resize((400, 300), Image.ANTIALIAS)
+    photo = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\Mall-Pelayanan-Publik-Tkinter\\img\\peng.png")
+    resize = photo.resize((420, 320), Image.ANTIALIAS)
     newphoto = ImageTk.PhotoImage(resize)
-    lbl = Label(master=frameLA1,image=newphoto)
+    lbl = Label(master=frameLA1,image=newphoto, border=0, bg="white")
     lbl.place(x=0, y=0, width=400, height=400)
 
-    frameLA2 = LabelFrame(master=root)
+    frameLA2 = LabelFrame(master=root, border=0, bg="white")
     frameLA2.place(x=400,width=400, height=400)
 
-    jdlAdm = Label(master=frameLA2, text="LOGIN SYSTEM!! \n ADMIN", font=("Roboto", 20, "bold"))
-    jdlAdm.pack(padx=10, pady=10)
+    img1 = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\Mall-Pelayanan-Publik-Tkinter\\img\\Vec1.png")
+    size = img1.resize((400, 316), Image.ANTIALIAS)
+    img1 = ImageTk.PhotoImage(size)
+    Label(master=frameLA2,image=img1,border=0,bg='white').place(x=100,y=190)
 
-    UserLbl = Label(master=frameLA2, text="Username")
-    UserLbl.place(x=72, y=90)
+    jdlAdm = Label(master=frameLA2, text="SIGN IN", font=("Roboto", 20, "bold"), fg="#FF7572", bg="white")
+    jdlAdm.pack(padx=10, pady=50)
 
-    PassLbl = Label(master=frameLA2, text="Password")
-    PassLbl.place(x=72, y=140)
+    def on_enter(e):
+        eUser.delete(0,'end')
+        eUser.config(fg="black")  
+        Frame(frameLA2,width=245,height=2,bg='#FF7572').place(x=80,y=140)    
+    def on_leave(e):
+        if eUser.get()=='':   
+            eUser.insert(0,'Username')
+            eUser.config(fg="gray") 
+            Frame(frameLA2,width=245,height=2,bg='#4471D8').place(x=80,y=140) 
 
-    eUser = Entry(master=frameLA2, width=40)
-    eUser.pack(padx=10, pady=20)
-    ePass = Entry(master=frameLA2, width=40, show="*")
-    ePass.pack(padx=10, pady=10)
+    eUser = Entry(master=frameLA2, width=40, border=0, fg="gray")
+    eUser.config(font=("Roboto", 10))
+    eUser.bind("<FocusIn>", on_enter)
+    eUser.bind("<FocusOut>", on_leave)
+    eUser.insert(0,'Username')
+    eUser.place(x=80, y=110, height=30)
+    Frame(frameLA2,width=245,height=2,bg='#4471D8').place(x=80,y=140) 
+
+    def on_enter(e):
+        ePass.delete(0,'end')
+        ePass.config(fg="black", show="*")  
+        Frame(frameLA2,width=245,height=2,bg='#FF7572').place(x=80,y=200)   
+    def on_leave(e):
+        if ePass.get()=='':   
+            ePass.insert(0,'Password')
+            ePass.config(fg="gray", show="")
+            Frame(frameLA2,width=245,height=2,bg='#4471D8').place(x=80,y=200) 
+
+    ePass = Entry(master=frameLA2, width=40, border=0, fg="gray")
+    ePass.config(font=("Roboto", 10),)
+    ePass.bind("<FocusIn>", on_enter)
+    ePass.bind("<FocusOut>", on_leave)
+    ePass.insert(0,'Password')
+    ePass.place(x=80, y=170, height=30)
+    Frame(frameLA2,width=245,height=2,bg='#4471D8').place(x=80,y=200) 
 
     def masuk():
         user = eUser.get()
         Pass = ePass.get()
         if user == "Admin" and Pass == "Admin":
             menuAdmin()
-        elif user and Pass != "Admin" or user == "Admin" and Pass != "Admin" or user != "Admin" and Pass == "Admin":
+        elif user and Pass != "Admin" or user == "Admin" and Pass != "Admin" or user != "Admin" and Pass == "Admin" or user == "" and Pass == "":
             messagebox.askretrycancel("Info","Username atau Password anda salah!")
 
-    LogBtn = Button(master=frameLA2, text="Login", width=15, command=masuk)
-    LogBtn.pack(padx=10, pady=10)
-    ExgBtn = Button(master=frameLA2, text="<Kembali", width=10, command=menuAwal)
+    LogBtn = Button(master=frameLA2, text="Login", command=masuk)
+    LogBtn.config(font=("Roboto", 10), fg="white", bg="#4471D8", border=0, activebackground="#FF7572", activeforeground="white")
+    LogBtn.place(x=105, y=230, width=200, height=30)
+    ExgBtn = Button(master=frameLA2, bg='#FF7572', border=0, fg="white", text="<Kembali", width=10, command=menuAwal)
     ExgBtn.place(x=0, y=370)
 
 def menuAdmin():
@@ -112,9 +205,9 @@ def menuAdmin():
     jdlAd = Label(master=frameA1, text="Menu Admin", font=("Roboto", 10))
     jdlAd.pack(padx=10, pady=10)
 
-    LAntriBtn = Button(master=frameA1, text="Lihat Daftar Antrian", width=40, command=menuAwal)
+    LAntriBtn = Button(master=frameA1, text="Lihat Daftar Antrian", width=40, command=lihAnt)
     LAntriBtn.pack(padx=10, pady=10)
-    PAntrianBtn = Button(master=frameA1, text="Panggil Antrian", width=40, command=menuAwal)
+    PAntrianBtn = Button(master=frameA1, text="Panggil Antrian", width=40, command="")
     PAntrianBtn.pack(padx=10, pady=10)
     PerPBtn = Button(master=frameA1, text="Pengajuan Permohonan", width=40, command=menuPengajuan)
     PerPBtn.pack(padx=10, pady=10)
@@ -475,7 +568,7 @@ def menuPengajuan():
         scrEnt = Entry(master=frame1)
         scrEnt.place(y=10, x=400)
 
-        ubhBtn = Button(master=frame1, text="Ubah", font=("Roboto", 8), command=formKtpC)
+        ubhBtn = Button(master=frame1, text="Ubah", font=("Roboto", 8), command=formKiAC)
         ubhBtn.place(y=8, x=140, width=40)
 
         frameDt = LabelFrame(master=frame1, text="Daftar Data Permohonan")
@@ -515,10 +608,10 @@ def menuPengajuan():
     def Ktp():
         global newphotoC, newphotoR, newphotoU, newphotoD
         destroyy()
-        photoC = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\MallPelayananPublik\\img\\create.png")
-        photoR = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\MallPelayananPublik\\img\\read.png")
-        photoU = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\MallPelayananPublik\\img\\update.png")
-        photoD = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\MallPelayananPublik\\img\\delete.png")
+        photoC = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\Mall-Pelayanan-Publik-Tkinter\\img\\create.png")
+        photoR = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\Mall-Pelayanan-Publik-Tkinter\\img\\read.png")
+        photoU = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\Mall-Pelayanan-Publik-Tkinter\\img\\update.png")
+        photoD = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\Mall-Pelayanan-Publik-Tkinter\\img\\delete.png")
         resizeC = photoC.resize((100, 100), Image.ANTIALIAS)
         resizeR = photoR.resize((100, 100), Image.ANTIALIAS)
         resizeU = photoU.resize((100, 100), Image.ANTIALIAS)
@@ -540,10 +633,10 @@ def menuPengajuan():
     def Kk():
         global newphotoC, newphotoR, newphotoU, newphotoD
         destroyy()
-        photoC = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\MallPelayananPublik\\img\\create.png")
-        photoR = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\MallPelayananPublik\\img\\read.png")
-        photoU = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\MallPelayananPublik\\img\\update.png")
-        photoD = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\MallPelayananPublik\\img\\delete.png")
+        photoC = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\Mall-Pelayanan-Publik-Tkinter\\img\\create.png")
+        photoR = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\Mall-Pelayanan-Publik-Tkinter\\img\\read.png")
+        photoU = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\Mall-Pelayanan-Publik-Tkinter\\img\\update.png")
+        photoD = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\Mall-Pelayanan-Publik-Tkinter\\img\\delete.png")
         resizeC = photoC.resize((100, 100), Image.ANTIALIAS)
         resizeR = photoR.resize((100, 100), Image.ANTIALIAS)
         resizeU = photoU.resize((100, 100), Image.ANTIALIAS)
@@ -565,10 +658,10 @@ def menuPengajuan():
     def AktK():
         global newphotoC, newphotoR, newphotoU, newphotoD
         destroyy()
-        photoC = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\MallPelayananPublik\\img\\create.png")
-        photoR = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\MallPelayananPublik\\img\\read.png")
-        photoU = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\MallPelayananPublik\\img\\update.png")
-        photoD = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\MallPelayananPublik\\img\\delete.png")
+        photoC = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\Mall-Pelayanan-Publik-Tkinter\\img\\create.png")
+        photoR = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\Mall-Pelayanan-Publik-Tkinter\\img\\read.png")
+        photoU = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\Mall-Pelayanan-Publik-Tkinter\\img\\update.png")
+        photoD = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\Mall-Pelayanan-Publik-Tkinter\\img\\delete.png")
         resizeC = photoC.resize((100, 100), Image.ANTIALIAS)
         resizeR = photoR.resize((100, 100), Image.ANTIALIAS)
         resizeU = photoU.resize((100, 100), Image.ANTIALIAS)
@@ -579,7 +672,7 @@ def menuPengajuan():
         newphotoD = ImageTk.PhotoImage(resizeD)
         jdl = Label(master=frame2, text="PENGAJUAN PERMOHONAN AKTA KELAHIRAN", font=("Roboto", 10, "bold"))
         jdl.pack(padx=10, pady=20)
-        btn1 = Button(master=frame2, image=newphotoC, width=213, height=185)
+        btn1 = Button(master=frame2, image=newphotoC, width=213, height=185, command=formAktKC)
         btn1.place(x=40, y=60)
         btn2 = Button(master=frame2, image=newphotoR, width=213, height=185, command=formAktKR)
         btn2.place(x=290, y=60)
@@ -590,10 +683,10 @@ def menuPengajuan():
     def AktP():
         global newphotoC, newphotoR, newphotoU, newphotoD
         destroyy()
-        photoC = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\MallPelayananPublik\\img\\create.png")
-        photoR = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\MallPelayananPublik\\img\\read.png")
-        photoU = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\MallPelayananPublik\\img\\update.png")
-        photoD = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\MallPelayananPublik\\img\\delete.png")
+        photoC = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\Mall-Pelayanan-Publik-Tkinter\\img\\create.png")
+        photoR = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\Mall-Pelayanan-Publik-Tkinter\\img\\read.png")
+        photoU = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\Mall-Pelayanan-Publik-Tkinter\\img\\update.png")
+        photoD = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\Mall-Pelayanan-Publik-Tkinter\\img\\delete.png")
         resizeC = photoC.resize((100, 100), Image.ANTIALIAS)
         resizeR = photoR.resize((100, 100), Image.ANTIALIAS)
         resizeU = photoU.resize((100, 100), Image.ANTIALIAS)
@@ -604,7 +697,7 @@ def menuPengajuan():
         newphotoD = ImageTk.PhotoImage(resizeD)
         jdl = Label(master=frame2, text="PENGAJUAN PERMOHONAN AKTA PERKAWINAN", font=("Roboto", 10, "bold"))
         jdl.pack(padx=10, pady=20)
-        btn1 = Button(master=frame2, image=newphotoC, width=213, height=185)
+        btn1 = Button(master=frame2, image=newphotoC, width=213, height=185, command=formAktPC)
         btn1.place(x=40, y=60)
         btn2 = Button(master=frame2, image=newphotoR, width=213, height=185, command=formAktPR)
         btn2.place(x=290, y=60)
@@ -615,10 +708,10 @@ def menuPengajuan():
     def KiA():
         global newphotoC, newphotoR, newphotoU, newphotoD
         destroyy()
-        photoC = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\MallPelayananPublik\\img\\create.png")
-        photoR = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\MallPelayananPublik\\img\\read.png")
-        photoU = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\MallPelayananPublik\\img\\update.png")
-        photoD = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\MallPelayananPublik\\img\\delete.png")
+        photoC = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\Mall-Pelayanan-Publik-Tkinter\\img\\create.png")
+        photoR = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\Mall-Pelayanan-Publik-Tkinter\\img\\read.png")
+        photoU = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\Mall-Pelayanan-Publik-Tkinter\\img\\update.png")
+        photoD = Image.open("C:\\Users\\Shrmanto\\Desktop\\CobaPython\\Mall-Pelayanan-Publik-Tkinter\\img\\delete.png")
         resizeC = photoC.resize((100, 100), Image.ANTIALIAS)
         resizeR = photoR.resize((100, 100), Image.ANTIALIAS)
         resizeU = photoU.resize((100, 100), Image.ANTIALIAS)
@@ -629,7 +722,7 @@ def menuPengajuan():
         newphotoD = ImageTk.PhotoImage(resizeD)
         jdl = Label(master=frame2, text="PENGAJUAN PERMOHONAN KIA", font=("Roboto", 10, "bold"))
         jdl.pack(padx=10, pady=20)
-        btn1 = Button(master=frame2, image=newphotoC, width=213, height=185)
+        btn1 = Button(master=frame2, image=newphotoC, width=213, height=185, command=formKiAC)
         btn1.place(x=40, y=60)
         btn2 = Button(master=frame2, image=newphotoR, width=213, height=185, command=formKiAR)
         btn2.place(x=290, y=60)
@@ -824,7 +917,255 @@ def formKkC():
     SubBtn = Button(master=new, text="Submit", width=25)
     SubBtn.pack(pady=10)
 
+def formAktKC():
+    global root
+    new = Toplevel(root)
+    new.title("Form Akta Kelahiran")
+    new.geometry("550x540")
+    jdlForm = Label(master=new, text="FORMULIR PERMOHONAN AKTA KELAHIRAN",font=("Roboto", 13, "bold"))
+    jdlForm.pack(pady=5)
+
+    NkK = Label(master=new, text="Nama Kepala Keluarga :",font=("Roboto", 8))
+    NkK.place(x=5, y=40)
+    NoKk = Label(master=new, text="Nomor Kartu Keluarga  :",font=("Roboto", 8))
+    NoKk.place(x=5, y=60)
+    eNkk = Entry(master=new, width=68)
+    eNkk.place(x=130, y=40)
+    eNokk = Entry(master=new, width=68)
+    eNokk.place(x=130, y=60)
+
+    frame1 = LabelFrame(master=new)
+    frame1.place(x=5, y=90, width=542, height=415)
+
+    frame2 = LabelFrame(master=frame1, text="BAYI", font=("Roboto", 8))
+    frame2.place(x=5, y=5, width=528, height=110)
+
+    NaNk = Label(master=frame2, text="Nama Anak                      :",font=("Roboto", 8))
+    NaNk.place(x=5, y=5)
+    TtL = Label(master=frame2, text="Tempat, Tanggal Lahir     :",font=("Roboto", 8))
+    TtL.place(x=5, y=25)
+    Jk = Label(master=frame2, text="Jenis Kelamin                   :",font=("Roboto", 8))
+    Jk.place(x=5, y=45)
+    AnkKe = Label(master=frame2, text="Anak Ke                           :",font=("Roboto", 8))
+    AnkKe.place(x=5, y=65)
+    eNaNk = Entry(master=frame2, width=62)
+    eNaNk.place(x=140, y=5)
+    eTtL = Entry(master=frame2, width=62)
+    eTtL.place(x=140, y=25)
+    eJk = Entry(master=frame2, width=62)
+    eJk.place(x=140, y=45)
+    eAnkKe = Entry(master=frame2, width=62)
+    eAnkKe.place(x=140, y=65)
+
+    frame3 = LabelFrame(master=frame1, text="IBU", font=("Roboto", 8))
+    frame3.place(x=5, y=115, width=528, height=70)
+
+    NaIb = Label(master=frame3, text="Nama Ibu                          :",font=("Roboto", 8))
+    NaIb.place(x=5, y=5)
+    NiKIb = Label(master=frame3, text="NIK Ibu                              :",font=("Roboto", 8))
+    NiKIb.place(x=5, y=25)
+    eNaIb = Entry(master=frame3, width=62)
+    eNaIb.place(x=140, y=5)
+    eNiKIb = Entry(master=frame3, width=62)
+    eNiKIb.place(x=140, y=25)
+
+    frame4 = LabelFrame(master=frame1, text="AYAH", font=("Roboto", 8))
+    frame4.place(x=5, y=185, width=528, height=70)
+
+    NaAyh = Label(master=frame4, text="Nama Ayah                      :",font=("Roboto", 8))
+    NaAyh.place(x=5, y=5)
+    NiAyh = Label(master=frame4, text="NIK Ayah                          :",font=("Roboto", 8))
+    NiAyh.place(x=5, y=25)
+    eNaAyh = Entry(master=frame4, width=62)
+    eNaAyh.place(x=140, y=5)
+    eNiKAyh = Entry(master=frame4, width=62)
+    eNiKAyh.place(x=140, y=25)
+
+    frame5 = LabelFrame(master=frame1, text="SAKSI", font=("Roboto", 8))
+    frame5.place(x=5, y=255, width=528, height=70)
+
+    NaSks1 = Label(master=frame5, text="Nama Saksi                      :",font=("Roboto", 8))
+    NaSks1.place(x=5, y=5)
+    NiSks1 = Label(master=frame5, text="NIK Saksi                          :",font=("Roboto", 8))
+    NiSks1.place(x=5, y=25)
+    eNaSks1 = Entry(master=frame5, width=62)
+    eNaSks1.place(x=140, y=5)
+    eNiKSks1 = Entry(master=frame5, width=62)
+    eNiKSks1.place(x=140, y=25)
+
+    frame6 = LabelFrame(master=frame1, font=("Roboto", 8))
+    frame6.place(x=5, y=325, width=528, height=55)
+
+    NaSks2 = Label(master=frame6, text="Nama Saksi                      :",font=("Roboto", 8))
+    NaSks2.place(x=5, y=5)
+    NiSks2 = Label(master=frame6, text="NIK Saksi                          :",font=("Roboto", 8))
+    NiSks2.place(x=5, y=25)
+    eNaSks2 = Entry(master=frame6, width=62)
+    eNaSks2.place(x=140, y=5)
+    eNiKSks2 = Entry(master=frame6, width=62)
+    eNiKSks2.place(x=140, y=25)
+
+    NaAktK = Label(master=frame1, text="Nomor Akta Kelahiran   :",font=("Roboto", 8))
+    NaAktK.place(x=5, y=385)
+    eNaAktK = Entry(master=frame1, width=66)
+    eNaAktK.place(x=130, y=385)
+
+    SubBtn = Button(master=new, text="Submit", width=25)
+    SubBtn.place(x=180, y=510)
+
+def formAktPC():
+    global root
+    new = Toplevel(root)
+    new.title("Form Akta Perkawinan")
+    new.geometry("550x410")
+    jdlForm = Label(master=new, text="FORMULIR PERMOHONAN AKTA PERKAWINAN",font=("Roboto", 13, "bold"))
+    jdlForm.pack(pady=5)
+
+    SrBp = Label(master=new, text="Surat Bukti Perkawinan   :",font=("Roboto", 8))
+    SrBp.place(x=5, y=40)
+    SrKl = Label(master=new, text="Surat Keterangan Lurah  :",font=("Roboto", 8))
+    SrKl.place(x=5, y=60)
+    eSrBp = Entry(master=new, width=66)
+    eSrBp.place(x=140, y=40)
+    eSrKl = Entry(master=new, width=66)
+    eSrKl.place(x=140, y=60)
+
+    frame1 = LabelFrame(master=new)
+    frame1.place(x=5, y=90, width=542, height=285)
+
+    frame2 = LabelFrame(master=frame1, text="PRIA", font=("Roboto", 8))
+    frame2.place(x=5, y=5, width=528, height=70)
+
+    NaPria = Label(master=frame2, text="Nama Pria                        :",font=("Roboto", 8))
+    NaPria.place(x=5, y=5)
+    NiPria = Label(master=frame2, text="NIK Pria                            :",font=("Roboto", 8))
+    NiPria.place(x=5, y=25)
+    eNaPria = Entry(master=frame2, width=62)
+    eNaPria.place(x=140, y=5)
+    eNiPria = Entry(master=frame2, width=62)
+    eNiPria.place(x=140, y=25)
+
+    frame3 = LabelFrame(master=frame1, text="WANITA", font=("Roboto", 8))
+    frame3.place(x=5, y=75, width=528, height=70)
+
+    NaWna = Label(master=frame3, text="Nama Wanita                   :",font=("Roboto", 8))
+    NaWna.place(x=5, y=5)
+    NiWna = Label(master=frame3, text="NIK Wanita                       :",font=("Roboto", 8))
+    NiWna.place(x=5, y=25)
+    eNaWna = Entry(master=frame3, width=62)
+    eNaWna.place(x=140, y=5)
+    eNiWna = Entry(master=frame3, width=62)
+    eNiWna.place(x=140, y=25)
+
+    frame4 = LabelFrame(master=frame1, text="SAKSI", font=("Roboto", 8))
+    frame4.place(x=5, y=145, width=528, height=70)
+
+    NSks1 = Label(master=frame4, text="Nama Saksi                      :",font=("Roboto", 8))
+    NSks1.place(x=5, y=5)
+    NkSks1 = Label(master=frame4, text="NIK Saksi                          :",font=("Roboto", 8))
+    NkSks1.place(x=5, y=25)
+    eNSks1 = Entry(master=frame4, width=62)
+    eNSks1.place(x=140, y=5)
+    eNKSks1 = Entry(master=frame4, width=62)
+    eNKSks1.place(x=140, y=25)
+
+    frame5 = LabelFrame(master=frame1, font=("Roboto", 8))
+    frame5.place(x=5, y=215, width=528, height=55)
+
+    NSks2 = Label(master=frame5, text="Nama Saksi                      :",font=("Roboto", 8))
+    NSks2.place(x=5, y=5)
+    NkSks2 = Label(master=frame5, text="NIK Saksi                          :",font=("Roboto", 8))
+    NkSks2.place(x=5, y=25)
+    eNSks2 = Entry(master=frame5, width=62)
+    eNSks2.place(x=140, y=5)
+    eNKSks2 = Entry(master=frame5, width=62)
+    eNKSks2.place(x=140, y=25)
+
+    SubBtn = Button(master=new, text="Submit", width=25)
+    SubBtn.place(x=180, y=380)
+
+def formKiAC():
+    global root
+    new = Toplevel(root)
+    new.title("Form KIA")
+    new.geometry("550x260")
+
+    jdlLbl = Label(master=new, text="FORMULIR PERMOHONAN KIA", font=("Roboto", 13, "bold"))
+    jdlLbl.pack(pady=5)
+    NoKaK = Label(master=new, text="Nomor Kartu Keluarga      :",font=("Roboto", 8))
+    NoKaK.place(x=5, y=40)
+    eNoKaK = Entry(master=new, width=66)
+    eNoKaK.place(x=140, y=40)
+
+    frame1 = LabelFrame(master=new)
+    frame1.place(x=5, y=70, width=540, height=150)
+
+    Naayhh = Label(master=frame1, text="Nama Ayah                    :",font=("Roboto", 8))
+    Naayhh.place(x=5, y=5)
+    Niayhh = Label(master=frame1, text="NIK Ayah                        :",font=("Roboto", 8))
+    Niayhh.place(x=5, y=25)
+    eNaayhh = Entry(master=frame1, width=64)
+    eNaayhh.place(x=140, y=5)
+    eNiayhh = Entry(master=frame1, width=64)
+    eNiayhh.place(x=140, y=25)
+
+    NaIbu = Label(master=frame1, text="Nama Ibu                        :",font=("Roboto", 8))
+    NaIbu.place(x=5, y=50)
+    NiIbu = Label(master=frame1, text="NIK Ibu                            :",font=("Roboto", 8))
+    NiIbu.place(x=5, y=70)
+    eNaIbu = Entry(master=frame1, width=64)
+    eNaIbu.place(x=140, y=50)
+    eNiIbu = Entry(master=frame1, width=64)
+    eNiIbu.place(x=140, y=70)
+
+    Nanak = Label(master=frame1, text="Nama Anak                     :",font=("Roboto", 8))
+    Nanak.place(x=5, y=95)
+    Nianak = Label(master=frame1, text="Nomor Akta Kelahiran     :",font=("Roboto", 8))
+    Nianak.place(x=5, y=115)
+    eNanak = Entry(master=frame1, width=64)
+    eNanak.place(x=140, y=95)
+    eNianak = Entry(master=frame1, width=64)
+    eNianak.place(x=140, y=115)
+
+    SubmBtn = Button(master=new, text="Submit", width=20)
+    SubmBtn.place(x=200, y=225)
+
+def AmbAnt():
+    global root
+    new = Toplevel(root)
+    new.title("Ambil Antrian")
+    new.geometry("300x150")
+    frame = LabelFrame(master=new)
+    frame.pack(padx=5, pady=5, fill=BOTH, expand=True)
+    Jdl = Label(master=frame, text="Ambil Antrian", font=("Roboto", 10, "bold"))
+    Jdl.pack()
+
+    frame2 = LabelFrame(master=frame)
+    frame2.pack(padx=5, pady=5, fill=BOTH, expand=True)
+    Nma = Label(master=frame2, text="Masukan Nama :", font=("Roboto", 8))
+    Nma.place(x=5, y=5)
+    eNma = Entry(master=frame2, width=20)
+    eNma.place(x=5, y=25)
+
+    def SubData():
+        dataName = eNma.get()
+        data2.enqueue(dataName)
+
+    subBtn = Button(master=frame2, text="Submit", command=SubData)
+    subBtn.place(x=140, y=5, width=125, height=90)
+
+def lihAnt():
+    global root
+    root.geometry("400x300")
+    frame = LabelFrame(master=root)
+    frame.place(x=5, y=40, width=392, height=200)
+    jdlLbl = Label(master=root, text="Daftar Antrian", font=("Roboto", 15, "bold"))
+    jdlLbl.place(x=258, y=5)
+    Kembtn = Button(master=root, text="<<Kembali", width=10, command=menuAdmin)
+    Kembtn.place(x=5, y=5)
+
 menuAwal()
-# formKkC()
+# LogAdmin()
+# lihAnt()
 
 root.mainloop()
